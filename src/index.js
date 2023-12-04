@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const cors = require('cors');
 
 const { PORT } = require("./config/env-variables.js");
@@ -14,13 +13,12 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/api/v1", v1Routes);
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/index.html"))
-});
+app.use("/test-backend", (req, res) => {
+    res.send("<h1>Hello from Digiboxx-Hiring-Portal Backend</h1>");
+})
 
 
 app.listen(PORT, async () => {
     console.log(`Server is running on PORT: ${PORT}`);
     await connectDB();
-})
+});
